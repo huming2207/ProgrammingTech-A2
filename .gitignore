@@ -1,0 +1,3 @@
+# Block OS X's damn DS_Store stuff
+
+*.DS_Store
