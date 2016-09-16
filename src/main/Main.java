@@ -1,10 +1,16 @@
 package main;
 
-public class Main {
+import lms.model.*;			// LMS original model
+import holding.Book;
+import holding.Holding;		// Holding (abstract) model
+import holding.Video;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+public class Main 
+{
 
+	public static void main(String[] args) 
+	{
+		
 	}
 
 }
