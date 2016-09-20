@@ -6,7 +6,7 @@ public class Video extends Holding
 {
 	private double runningTime;
 	private double loanFee;
-	private int loanPeriod = 7;
+	private final int LOAN_PERIOD = 7;
 	private double latePenalty;
 	private boolean activeStatus = true;
 	private DateTime dateBorrowed;
@@ -28,7 +28,7 @@ public class Video extends Holding
 	{
 		this.dateReturned = dateReturned;
 		int diffDayResult = DateTime.diffDays(this.dateReturned, this.dateBorrowed);
-		if (diffDayResult <= this.loanPeriod)
+		if (diffDayResult <= this.LOAN_PERIOD)
 		{
 			// The loan does not expire, so there is no late penalty.
 			return 0.0;
@@ -58,7 +58,7 @@ public class Video extends Holding
 	public boolean returnHolding(DateTime dateReturned)
 	{
 		int diffDayResult = DateTime.diffDays(this.dateReturned, this.dateBorrowed);
-		if (diffDayResult <= this.loanPeriod)
+		if (diffDayResult <= this.LOAN_PERIOD)
 		{
 			// The loan does not expire, so there is no late penalty.
 			if (diffDayResult < 1)
@@ -112,7 +112,7 @@ public class Video extends Holding
 						+ this.runningTime + ":" 
 						+ this.dateBorrowed.getFormattedDate() + ":"
 						+ this.loanFee + ":" 
-						+ this.loanPeriod + ":" 
+						+ this.LOAN_PERIOD + ":" 
 						+ activeStr;
 		
 		return bookStr;
@@ -132,7 +132,7 @@ public class Video extends Holding
 	
 	public int getLoanPeriod()
 	{
-		return loanPeriod;
+		return LOAN_PERIOD;
 	}
 	
 	public double getLatePenalty()

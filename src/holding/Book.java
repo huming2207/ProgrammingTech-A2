@@ -9,11 +9,11 @@ public class Book extends Holding
 	private DateTime dateBorrowed;
 	private DateTime dateReturned;
 	private boolean onLoan = false;
-	private final double loanFee = 10;
-	private final int loanPeriod = 28;
-	private final double latePenalty = 2;
+	private final double LOAN_FEE = 10;
+	private final int LOAN_PERIOD = 28;
+	private final double LATE_PENALTY = 2;
 	
-	public Book(String holdingId, String title, double loanFee, int numPages)
+	public Book(String holdingId, String title, int numPages)
 	{
 		super(holdingId, title);
 		this.numPages = numPages;
@@ -24,14 +24,14 @@ public class Book extends Holding
 	{
 		this.dateReturned = dateReturned;
 		int diffDayResult = DateTime.diffDays(this.dateReturned, this.dateBorrowed);
-		if (diffDayResult <= this.loanPeriod)
+		if (diffDayResult <= this.LOAN_PERIOD)
 		{
 			// The loan does not expire, so there is no late penalty.
 			return 0.0;
 		}
 		else
 		{
-			return (diffDayResult * this.latePenalty);
+			return (diffDayResult * this.LATE_PENALTY);
 		}
 	}
 	
@@ -104,8 +104,8 @@ public class Book extends Holding
 						+ super.getTitle() + ":"  
 						+ this.numPages + ":" 
 						+ this.dateBorrowed.getFormattedDate() + ":"
-						+ this.loanFee + ":" 
-						+ this.loanPeriod + ":" 
+						+ this.LOAN_FEE + ":" 
+						+ this.LOAN_PERIOD + ":" 
 						+ activeStr;
 		
 		return bookStr;
@@ -132,17 +132,17 @@ public class Book extends Holding
 	
 	public double getLoanFee()
 	{
-		return loanFee;
+		return LOAN_FEE;
 	}
 	
 	public int getLoanPeriod()
 	{
-		return loanPeriod;
+		return LOAN_PERIOD;
 	}
 	
 	public double getLatePenalty()
 	{
-		return latePenalty;
+		return LATE_PENALTY;
 	}
 	
 	public boolean getActiveStatus()

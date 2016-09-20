@@ -1,103 +1,100 @@
 package lms.model.facade;
 
-
+import library.*;
 import lms.model.util.DateTime;
 
 public class LMSFacade 
-{
-
-	/* you need to modify the methods below to forward calls to the methods in your library class
-	 * and return the correct values to your menu. */
-	
-	
+{	
 	public LMSFacade()
 	{
 		
 	}
 	
+	private Library library = new Library();
+	
 	private void initialiseEngine() 
 	{
-		
+		library.initialiseEngine();
 	}
 	
 	public boolean addBook(String id, String title, int numPages) 
 	{
-		return false;
+		return library.addBook(id, title, numPages);
 	}
 
-	public boolean addVideo(String id, String title, double loanFee, 
-			double runningTime) 
+	public boolean addVideo(String id, String title, double loanFee, double runningTime) 
 	{
-		return false;
+		return library.addVideo(id, title, loanFee, runningTime);
 	}
 	
 	public boolean removeHolding(String holdingId) 
 	{
-		return false;
+		return library.removeHolding(holdingId);
 	}
 	
 	public boolean addMember(String id, String name) 
 	{
-		return false;		
+		return library.addMember(id, name);
 	}
 	
 	public boolean removeMember(String memberId)
 	{
-		return false;
+		return library.removeMember(memberId);
 	}
+	
 	
 	public boolean borrowHolding(String memberId, String holdingId)  
 	{
-		return false;
+		return library.borrowHolding(memberId, holdingId);
 	}
 	
 	public boolean returnHolding(String memberId, String holdingId, DateTime dateReturned) 
 	{
-		return false;
+		return library.returnHolding(memberId, holdingId, dateReturned);
 	}
 	
 	public String printAllHoldings()
 	{
-		return "";
+		return library.printAllHoldings();
 	}
 	
 	public String printAllMembers()
 	{
-		return "";
+		return library.printAllMembers();
 	}
 	
 	public String printSpecificHolding(String holdingId)
 	{
-		return "";
+		return library.printSpecificHolding(holdingId);
 	}
 	
 	public String printSpecificMember(String memberId)
 	{
-		return "";
+		return library.printSpecificMember(memberId);
 	}
 	
 	public boolean resetMembersCredit(String memberId)
 	{
-		return false;
+		return library.resetMembersCredit(memberId);
 	}
 	
 	public double getLateFee(String memberId)
 	{
-		return 0.0;
+		return library.getLateFee(memberId);
 	}
 	
 	public double getMembersBalance(String memberId)
 	{
-		return 0.0;
+		return library.getMembersBalance(memberId);
 	}
 	
 	public boolean activate(String id)
 	{
-		return false;
+		return library.activate(id);
 	}
 
 	public boolean deactivate(String id)
 	{
-		return false;
+		return library.deactivate(id);
 	}
 }
