@@ -12,10 +12,11 @@ public class StandardMember extends Member
 	private String memberID;
 	private String memberName;
 	private static double credit;
-	private final double maxiumCredit = 30;
+	private final double MAX_CREDIT = 30;
 	private boolean activateStatus;
 	private List<Book> memberBook = new ArrayList<Book>();
 	private List<Video> memberVideo = new ArrayList<Video>();
+	private double lateFee = 0.0;
 	
 	public StandardMember(String standardMemberId, String standardMemberName)
 	{
@@ -84,6 +85,11 @@ public class StandardMember extends Member
 			{
 				System.out.println("Info: Book returned successfully!!");
 				
+				if(book.getLatePenalty() > 0)
+				{
+					lateFee += book.getLatePenalty();
+				}
+				
 				return true;
 			}
 			else
@@ -98,6 +104,12 @@ public class StandardMember extends Member
 			if(video.returnHolding(returnDate))
 			{
 				System.out.println("Info: Video returned successfully!!");
+				
+				if(video.getLatePenalty() > 0)
+				{
+					lateFee += video.getLatePenalty();
+				}
+				
 				return true;
 			}
 			else
@@ -105,12 +117,15 @@ public class StandardMember extends Member
 				System.out.println("Error: Video failed to return!!!");
 				return false;
 			}
+			
 		}
 		else
 		{
 			System.out.println("Error: Something went wrong (might be a invalid item??)");
 			return false;
 		}
+		
+	
 		
 	}
 
@@ -157,12 +172,12 @@ public class StandardMember extends Member
 	@Override
 	public String print() 
 	{
-		String memberStr = "ID:\t" +  this.memberID
-						+ "\nTitle\t" + this.memberName
+		String memberStr = "ID:\t\t\t" +  this.memberID
+						+ "\nTitle\t\t\t" + this.memberName
 						+ "\nRemaining Credit:\t" + StandardMember.credit + "\n";
 		
 		String itemId = new String();
-		
+		String itemStr = new String();
 		
 		// Add the item ID only if it exists more than 1.
 		if (memberBook.size() >= 1)
@@ -187,7 +202,14 @@ public class StandardMember extends Member
 			itemId = itemId.substring(0, itemId.length() - 1);
 		}
 		
-		String itemStr = "Current holdings on loan:\n\n" + itemId;
+		if(memberBook.size() == 0 && memberVideo.size() == 0)
+		{
+			itemStr =  "";
+		}
+		else
+		{
+			itemStr = "Current holdings on loan:\n\n" + itemId;
+		}
 		
 		// Finally, return two parts of the strings.
 		return memberStr + itemStr;
@@ -202,7 +224,7 @@ public class StandardMember extends Member
 	@Override
 	public void addCredit(double creditAddValue) 
 	{
-		if ((StandardMember.credit +  creditAddValue) >= this.maxiumCredit)
+		if ((StandardMember.credit +  creditAddValue) >= this.MAX_CREDIT)
 		{
 			System.out.println("Error: Credit already reset to maxium value!");
 		}
@@ -227,14 +249,14 @@ public class StandardMember extends Member
 	@Override
 	public boolean resetCredit() 
 	{
-		if (StandardMember.credit >= this.maxiumCredit)
+		if (StandardMember.credit >= this.MAX_CREDIT)
 		{
 			System.out.println("Error: Credit already reset to maxium value!");
 			return false;
 		}
 		else
 		{
-			StandardMember.credit = this.maxiumCredit;
+			StandardMember.credit = this.MAX_CREDIT;
 			return true;
 		}
 	}
@@ -249,5 +271,11 @@ public class StandardMember extends Member
 	public String getName() 
 	{
 		return this.memberName;
+	}
+	
+	@Override
+	public double getLatePenalty() 
+	{
+		return this.lateFee;
 	}
 }

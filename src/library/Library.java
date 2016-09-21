@@ -64,9 +64,10 @@ public class Library
 		for(int i = 0; i < holdingList.size(); i++)
 		{
 			Holding holdingItem = holdingList.get(i);
+			String str = holdingItem.getId();
 			
 			// Delete only if the holding ID matches.
-			if (holdingItem.getId() == holdingId)
+			if (holdingItem.getId().matches(holdingId))
 			{
 				holdingList.remove(i);
 				removeStatus = true;
@@ -109,7 +110,7 @@ public class Library
 			Member memberItem = memberList.get(i);
 			
 			// Delete only if the holding ID matches.
-			if (memberItem.getId() == memberId)
+			if (memberItem.getId().matches(memberId))
 			{
 				memberList.remove(i);
 				removeStatus = true;
@@ -128,7 +129,7 @@ public class Library
 		for (int i = 0; i < holdingList.size(); i++)
 		{
 			Holding holdingItem = holdingList.get(i);
-			if (holdingItem.getId() == holdingId)
+			if (holdingItem.getId().matches(holdingId))
 			{
 				System.out.println("Info: Holding item found.");
 				Holding selectedHolding = holdingItem;
@@ -170,7 +171,7 @@ public class Library
 		for (int i = 0; i < holdingList.size(); i++)
 		{
 			Holding holdingItem = holdingList.get(i);
-			if (holdingItem.getId() == holdingId)
+			if (holdingItem.getId().matches(holdingId))
 			{
 				System.out.println("Info: Holding item found.");
 				Holding selectedHolding = holdingItem;
@@ -180,7 +181,7 @@ public class Library
 				for (int j = 0; j < memberList.size(); j++)
 				{
 					Member memberItem = memberList.get(j);
-					if (memberItem.getId() == memberId)
+					if (memberItem.getId().matches(memberId))
 					{
 						DateTime returnTime = new DateTime();
 						memberItem.returnHolding(selectedHolding, returnTime);
@@ -205,46 +206,167 @@ public class Library
 	
 	public String printAllHoldings()
 	{
-		return "";
+		String str = new String();
+		for (int i = 0; i < holdingList.size(); i++)
+		{
+			str += holdingList.get(i).print();
+		}
+		
+		return str;
 	}
 	
 	public String printAllMembers()
 	{
-		return "";
+		String str = new String();
+		for (int i = 0; i < memberList.size(); i++)
+		{
+			str += memberList.get(i).print();
+		}
+		
+		return str;
 	}
 	
 	public String printSpecificHolding(String holdingId)
 	{
-		return "";
+		String str = new String();
+		for (int i = 0; i < holdingList.size(); i++)
+		{
+			if (holdingList.get(i).getId().matches(holdingId))
+			{
+				str = holdingList.get(i).toString();
+			}
+		}
+		
+		return str;
 	}
 	
 	public String printSpecificMember(String memberId)
 	{
-		return "";
+		String str = new String();
+		for (int i = 0; i < holdingList.size(); i++)
+		{
+			if (memberList.get(i).getId().matches(memberId))
+			{
+				str = memberList.get(i).print();
+			}
+		}
+		
+		return str;
 	}
 	
 	public boolean resetMembersCredit(String memberId)
 	{
-		return false;
+		boolean resetStatus = false;
+		for (int i = 0; i < memberList.size(); i++)
+		{
+			if (memberList.get(i).getId().matches(memberId))
+			{
+				memberList.get(i).resetCredit();
+			}
+		}
+		
+		return resetStatus;
 	}
 	
 	public double getLateFee(String memberId)
 	{
-		return 0.0;
+		double lateFee = 0.0;
+		for (int i = 0; i < memberList.size(); i++)
+		{
+			if (memberList.get(i).getId().matches(memberId))
+			{
+				memberList.get(i).getLatePenalty();
+			}
+		}
+		
+		return lateFee;
 	}
 	
 	public double getMembersBalance(String memberId)
 	{
-		return 0.0;
+		double result = 0.0;
+		for (int i = 0; i < memberList.size(); i++)
+		{
+			if (memberList.get(i).getId().matches(memberId))
+			{
+				result = memberList.get(i).getCredit();
+			}
+		}
+		
+		return result;
 	}
 	
 	public boolean activate(String id)
 	{
-		return false;
+		if (id.startsWith("v") || id.startsWith("b"))
+		{
+			boolean result = false;
+			for (int i = 0; i < holdingList.size(); i++)
+			{
+				if (holdingList.get(i).getId().matches(id))
+				{
+					result = holdingList.get(i).activate();
+				}
+			}
+			
+			return result;
+			
+		}
+		else if(id.startsWith("s") || id.startsWith("p"))
+		{
+			boolean result = false;
+			for (int i = 0; i < memberList.size(); i++)
+			{
+				if (memberList.get(i).getId().matches(id))
+				{
+					result = memberList.get(i).activate();
+				}
+			}
+			
+			return result;
+		}
+		else
+		{
+			System.out.println("Error: Something went wrong, probably it's an invalid item or ID (" + id + ").");
+			return false;
+		}
+		
+		
 	}
 
 	public boolean deactivate(String id)
 	{
-		return false;
+		if (id.startsWith("v") || id.startsWith("b"))
+		{
+			boolean result = false;
+			for (int i = 0; i < holdingList.size(); i++)
+			{
+				if (holdingList.get(i).getId().matches(id))
+				{
+					result = holdingList.get(i).deactivate();
+				}
+			}
+			
+			return result;
+			
+		}
+		else if(id.startsWith("s") || id.startsWith("p"))
+		{
+			boolean result = false;
+			for (int i = 0; i < memberList.size(); i++)
+			{
+				if (memberList.get(i).getId().matches(id))
+				{
+					result = memberList.get(i).deactivate();
+				}
+			}
+			
+			return result;
+		}
+		else
+		{
+			System.out.println("Error: Something went wrong, probably it's an invalid item or ID (" + id + ").");
+			return false;
+		}
 	}
 }

@@ -9,15 +9,7 @@ public abstract class Holding
 	
 	public Holding(String holdingId, String title)
 	{
-		if(holdingId.length() < 7)
-		{
-			this.holdingId = "Invalid";
-		}
-		else
-		{
-			this.holdingId = holdingId;
-		}
-		
+		this.holdingId = holdingId;
 		this.title = title;
 	}
 	
@@ -28,9 +20,15 @@ public abstract class Holding
 	
 	public abstract boolean returnHolding(DateTime dateReturned);
 	
+	public abstract String print();
+	
+	public abstract String toString();
+	
 	public abstract boolean activate();
 	
 	public abstract boolean deactivate();
+	
+	public abstract double getLatePenalty();
 	
 	
 	/* In this line below is all those getters and setters. */

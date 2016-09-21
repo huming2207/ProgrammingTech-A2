@@ -42,4 +42,8 @@ public abstract class Member
 	
 	public abstract double getCredit();
 	
+	public abstract double getLatePenalty();
+
+	
+	
 }

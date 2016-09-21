@@ -42,7 +42,6 @@ public class LMSFacade
 		return library.removeMember(memberId);
 	}
 	
-	
 	public boolean borrowHolding(String memberId, String holdingId)  
 	{
 		return library.borrowHolding(memberId, holdingId);

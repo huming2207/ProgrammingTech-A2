@@ -12,6 +12,7 @@ public class Video extends Holding
 	private DateTime dateBorrowed;
 	private DateTime dateReturned;
 	private boolean onLoan = false;
+	private double lateFee = 0.0;
 
 	
 	public Video(String holdingId, String title, double loanFee, double runningTime)
@@ -19,7 +20,7 @@ public class Video extends Holding
 		super(holdingId, title);
 		
 		this.runningTime = runningTime;
-		
+		this.loanFee = loanFee;
 		// Videos: late fee = number of late days x 50% of the standard loan fee.
 		this.latePenalty = loanFee * 0.5;
 	}
@@ -73,7 +74,7 @@ public class Video extends Holding
 		}
 		else
 		{
-			calculateLateFee(dateReturned);
+			this.lateFee += calculateLateFee(dateReturned);
 			this.onLoan = false;
 			return true;
 		}
@@ -89,6 +90,51 @@ public class Video extends Holding
 	{
 		this.onLoan = false;
 		return true;
+	}
+	
+	@Override
+	public String print() 
+	{
+		String activeStr = new String();
+		
+		
+		if (activeStatus)
+		{
+			activeStr = "Active";
+		}
+		else
+		{
+			activeStr = "Deactive";
+		}
+		
+		if (this.onLoan)
+		{			
+			String printStr = "\n\nID:\t" + super.getId() 
+				+ "\nTitle:\t" + super.getTitle()
+				+ "\nRunning Time:\t" + this.runningTime
+				+ "\nLoan Fee:\t" + this.loanFee
+				+ "\nMax Loan Period:\t" + LOAN_PERIOD
+				+ "\nOn Loan:\t" + "Yes"
+				+ "\nDate of Loan:\t" + dateBorrowed.getFormattedDate()
+				+ "\nSystem Status:\t" + activeStr
+				+ "\n";
+			
+			return printStr;
+		}
+		else
+		{
+			String printStr = "\n\nID:\t" + super.getId() 
+				+ "\nTitle:\t" + super.getTitle()
+				+ "\nRunning Time:\t" + this.runningTime
+				+ "\nLoan Fee:\t" + this.loanFee
+				+ "\nMax Loan Period:\t" + LOAN_PERIOD
+				+ "\nOn Loan:\t" + "No" 
+				+ "\nSystem Status:\t" + activeStr
+				+ "\n";
+			
+			return printStr;
+		}
+		
 	}
 	
 	public String toString()
@@ -137,12 +183,11 @@ public class Video extends Holding
 	
 	public double getLatePenalty()
 	{
-		return latePenalty;
+		return this.lateFee;
 	}
 	
 	public boolean getActiveStatus()
 	{
 		return activeStatus;
 	}
-
 }

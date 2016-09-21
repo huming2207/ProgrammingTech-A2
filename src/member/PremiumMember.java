@@ -12,10 +12,11 @@ public class PremiumMember extends Member
 	private String memberID;
 	private String memberName;
 	private static double credit;
-	private final double maxiumCredit = 45;
+	private final double MAX_CREDIT = 45;
 	private boolean activateStatus;
 	private List<Book> memberBook = new ArrayList<Book>();
 	private List<Video> memberVideo = new ArrayList<Video>();
+	private double lateFee = 0.0;
 	
 	public PremiumMember(String premimumMemberId, String premiumMemberName)
 	{
@@ -83,6 +84,11 @@ public class PremiumMember extends Member
 			{
 				System.out.println("Info: Book returned successfully!!");
 				
+				if(book.getLatePenalty() > 0)
+				{
+					lateFee += book.getLatePenalty();
+				}
+				
 				return true;
 			}
 			else
@@ -97,6 +103,12 @@ public class PremiumMember extends Member
 			if(video.returnHolding(returnDate))
 			{
 				System.out.println("Info: Video returned successfully!!");
+				
+				if(video.getLatePenalty() > 0)
+				{
+					lateFee += video.getLatePenalty();
+				}
+				
 				return true;
 			}
 			else
@@ -156,12 +168,12 @@ public class PremiumMember extends Member
 	@Override
 	public String print() 
 	{
-		String memberStr = "ID:\t" +  this.memberID
-						+ "\nTitle\t" + this.memberName
+		String memberStr = "ID:\t\t\t" +  this.memberID
+						+ "\nTitle\t\t\t" + this.memberName
 						+ "\nRemaining Credit:\t" + credit + "\n";
 		
 		String itemId = new String();
-		
+		String itemStr = new String();
 		
 		// Add the item ID only if it exists more than 1.
 		if (memberBook.size() >= 1)
@@ -186,7 +198,14 @@ public class PremiumMember extends Member
 			itemId = itemId.substring(0, itemId.length() - 1);
 		}
 		
-		String itemStr = "Current holdings on loan:\n\n" + itemId;
+		if(memberBook.size() == 0 && memberVideo.size() == 0)
+		{
+			itemStr =  "";
+		}
+		else
+		{
+			itemStr = "Current holdings on loan:\n\n" + itemId;
+		}
 		
 		// Finally, return two parts of the strings.
 		return memberStr + itemStr;
@@ -201,7 +220,7 @@ public class PremiumMember extends Member
 	@Override
 	public void addCredit(double creditAddValue) 
 	{
-		if ((PremiumMember.credit +  creditAddValue) >= this.maxiumCredit)
+		if ((PremiumMember.credit +  creditAddValue) >= this.MAX_CREDIT)
 		{
 			System.out.println("Error: Credit already reset to maxium value!");
 		}
@@ -226,14 +245,14 @@ public class PremiumMember extends Member
 	@Override
 	public boolean resetCredit() 
 	{
-		if (PremiumMember.credit >= this.maxiumCredit)
+		if (PremiumMember.credit >= this.MAX_CREDIT)
 		{
 			System.out.println("Error: Credit already reset to maxium value!");
 			return false;
 		}
 		else
 		{
-			PremiumMember.credit = this.maxiumCredit;
+			PremiumMember.credit = this.MAX_CREDIT;
 			return true;
 		}
 	}
@@ -248,5 +267,11 @@ public class PremiumMember extends Member
 	public String getName() 
 	{
 		return this.memberName;
+	}
+
+	@Override
+	public double getLatePenalty() 
+	{
+		return this.lateFee;
 	}
 }
