@@ -6,7 +6,7 @@ public class Video extends Holding
 {
 	private double runningTime;
 	private double loanFee;
-	private final int LOAN_PERIOD = 7;
+	private static final int LOAN_PERIOD = 7;
 	private double latePenalty;
 	private boolean activeStatus = true;
 	private DateTime dateBorrowed;
@@ -29,7 +29,7 @@ public class Video extends Holding
 	{
 		this.dateReturned = dateReturned;
 		int diffDayResult = DateTime.diffDays(this.dateReturned, this.dateBorrowed);
-		if (diffDayResult <= this.LOAN_PERIOD)
+		if (diffDayResult <= LOAN_PERIOD)
 		{
 			// The loan does not expire, so there is no late penalty.
 			return 0.0;
@@ -162,16 +162,6 @@ public class Video extends Holding
 	
 	public String toString()
 	{
-		String activeStr = new String();
-		
-		if (activeStatus)
-		{
-			activeStr = "active";
-		}
-		else
-		{
-			activeStr = "deactive";
-		}
 		
 		// Video holding format -->
 		// id:title:runningTime:loan_date:standard_loan_fee:max_loan_period:active
@@ -181,9 +171,8 @@ public class Video extends Holding
 						+ this.runningTime + ":" 
 						+ this.dateBorrowed.getFormattedDate() + ":"
 						+ this.loanFee + ":" 
-						+ this.LOAN_PERIOD + ":" 
-						+ activeStr;
-		
+						+ LOAN_PERIOD + ":" 
+						+ getActiveStatusStr();		
 		return bookStr;
 	}
 	
@@ -213,4 +202,37 @@ public class Video extends Holding
 	{
 		return activeStatus;
 	}
+
+	public void setDateBorrowed(DateTime dateBorrowed) 
+	{
+		this.dateBorrowed = dateBorrowed;
+	}
+	
+	public DateTime getDateBorrowed()
+	{
+		return this.dateBorrowed;
+	}
+	
+	public double getLength()
+	{
+		return this.runningTime;
+	}
+	
+	public int getPages()
+	{
+		return 0;
+	}
+	
+	public String getActiveStatusStr()
+	{
+		if(this.activeStatus)
+		{
+			return "active";
+		}
+		else
+		{
+			return "deactive";
+		}
+	}
+	
 }

@@ -274,4 +274,48 @@ public class PremiumMember extends Member
 	{
 		return this.lateFee;
 	}
+	
+	@Override
+	public String getHoldingStr()
+	{
+		String itemId = new String();
+		
+		// Add the item ID only if it exists more than 1.
+		if (memberBook.size() >= 1)
+		{
+			for (int i = 0; i < memberBook.size(); i++)
+			{
+				itemId += memberBook.get(i).getId() + ":";
+			}
+		}
+		if (memberVideo.size() >= 1)
+		{
+			for (int i = 0; i < memberVideo.size(); i++)
+			{
+				itemId += memberVideo.get(i).getId() + ":";
+			}
+		}
+		
+		
+		// Remove the last colon ":" symbol if exists (obviously it must exists if this member has an item!)
+		if (itemId.endsWith(":"))
+		{
+			itemId = itemId.substring(0, itemId.length() - 1);
+		}
+		
+		return itemId;
+	}
+	
+	@Override
+	public boolean hasHolding()
+	{
+		if (memberBook.isEmpty())
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 }

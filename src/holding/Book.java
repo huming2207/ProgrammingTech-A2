@@ -145,17 +145,6 @@ public class Book extends Holding
 	
 	public String toString()
 	{
-		String activeStr = new String();
-		
-		if (activeStatus)
-		{
-			activeStr = "active";
-		}
-		else
-		{
-			activeStr = "deactive";
-		}
-		
 		// Book holding format -->
 		// id:title:number_of_pages:loan_date:standard_loan_fee:max_loan_period:active
 		
@@ -167,7 +156,7 @@ public class Book extends Holding
 					+ "null" + ":"
 					+ LOAN_FEE + ":" 
 					+ LOAN_PERIOD + ":" 
-					+ activeStr;
+					+ getActiveStatusStr();
 	
 			return bookStr;
 		}
@@ -180,7 +169,7 @@ public class Book extends Holding
 					+ this.dateBorrowed.getFormattedDate() + ":"
 					+ LOAN_FEE + ":" 
 					+ LOAN_PERIOD + ":" 
-					+ activeStr;
+					+ getActiveStatusStr();
 	
 			return bookStr;
 		}	
@@ -227,5 +216,36 @@ public class Book extends Holding
 		return activeStatus;
 	}
 
+	public void setDateBorrowed(DateTime dateBorrowed) 
+	{
+		this.dateBorrowed = dateBorrowed;
+	}
+	
+	public DateTime getDateBorrowed()
+	{
+		return this.dateBorrowed;
+	}
+	
+	public double getLength()
+	{
+		return 0.0;
+	}
+	
+	public int getPages()
+	{
+		return this.numPages;
+	}
+	
+	public String getActiveStatusStr()
+	{
+		if(this.activeStatus)
+		{
+			return "active";
+		}
+		else
+		{
+			return "deactive";
+		}
+	}
 
 }

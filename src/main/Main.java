@@ -35,6 +35,8 @@ public class Main
 	
 	public static void main(String[] args) 
 	{
+		System.out.println(System.getProperty("user.dir"));
+		facadeController.initialiseEngine();
 		mainMenu();
 	}
 	
@@ -145,8 +147,7 @@ public class Main
 			case 0:
 			{
 				System.out.println("Gracefully exiting this program. See you mate.");
-				
-				// Exit this program
+				facadeController.saveFile();
 				System.exit(0);
 			}
 			
@@ -437,12 +438,12 @@ public class Main
 	
 	private static void saveToFile()
 	{
-		
+		facadeController.saveFile();
 	}
 	
 	private static void loadFromFile()
 	{
-		
+		facadeController.readFile();
 	}
 	
 

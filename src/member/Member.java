@@ -43,7 +43,9 @@ public abstract class Member
 	public abstract double getCredit();
 	
 	public abstract double getLatePenalty();
-
 	
+	public abstract String getHoldingStr();
+
+	public abstract boolean hasHolding();
 	
 }

@@ -5,6 +5,12 @@ import lms.model.util.DateTime;
 
 public class LMSFacade 
 {	
+	
+	/*
+	 * According to the Email from teacher,
+	 * I'm allowed to change/add something in this "Facade" class.
+	 * 
+	 * */
 	public LMSFacade()
 	{
 		
@@ -13,7 +19,7 @@ public class LMSFacade
 	private Library library = new Library();
 	public DateTime currentTime = new DateTime();
 	
-	private void initialiseEngine() 
+	public void initialiseEngine() 
 	{
 		library.initialiseEngine();
 	}
@@ -96,5 +102,15 @@ public class LMSFacade
 	public boolean deactivate(String id)
 	{
 		return library.deactivate(id);
+	}
+	
+	public void saveFile()
+	{
+		library.saveFile();
+	}
+	
+	public void readFile()
+	{
+		library.readFile();
 	}
 }

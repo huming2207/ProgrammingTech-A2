@@ -1,16 +1,16 @@
 package library;
 
 import java.util.ArrayList;
-import java.util.List;
 import holding.*;
 import member.*;
+import library.FileHandler;
 import lms.model.util.DateTime;
 
 public class Library 
 {
 	
-	private List<Holding> holdingList = new ArrayList<Holding>();
-	private List<Member> memberList = new ArrayList<Member>();
+	private ArrayList<Holding> holdingList = new ArrayList<Holding>();
+	private ArrayList<Member> memberList = new ArrayList<Member>();
 	
 	public Library()
 	{
@@ -19,7 +19,7 @@ public class Library
 	
 	public void initialiseEngine() 
 	{
-		
+		this.readFile();
 	}
 	
 	public boolean addBook(String id, String title, int numPages) 
@@ -347,6 +347,7 @@ public class Library
 
 	public boolean deactivate(String id)
 	{
+		// Holding
 		if (id.startsWith("v") || id.startsWith("b"))
 		{
 			boolean result = false;
@@ -361,6 +362,8 @@ public class Library
 			return result;
 			
 		}
+		
+		// Members
 		else if(id.startsWith("s") || id.startsWith("p"))
 		{
 			boolean result = false;
@@ -379,5 +382,24 @@ public class Library
 			System.out.println("Error: Something went wrong, probably it's an invalid item or ID (" + id + ").");
 			return false;
 		}
+	}
+	
+	public void readFile()
+	{
+		FileHandler fileController = new FileHandler();
+		
+		this.holdingList = fileController.readHoldingList("holdings.txt", "holdings_backup.txt");
+		
+		this.memberList = fileController.readMemberList(holdingList, "members.txt", "members_backup.txt");
+
+	}
+	
+	public void saveFile()
+	{
+		FileHandler fileController = new FileHandler();
+		fileController.writeHoldingToFile("holdings.txt", this.holdingList);
+		fileController.writeHoldingToFile("holdings_backup.txt", this.holdingList);
+		fileController.writeMemberToFile("members.txt", this.memberList);
+		fileController.writeMemberToFile("members_backup.txt", this.memberList);
 	}
 }
