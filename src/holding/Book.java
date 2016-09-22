@@ -190,11 +190,6 @@ public class Book extends Holding
 	
 	// In this line below is all those getter methods.
 	
-	public int getNumPages()
-	{
-		return numPages;
-	}
-	
 	public double getLoanFee()
 	{
 		return LOAN_FEE;
