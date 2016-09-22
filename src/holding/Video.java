@@ -58,12 +58,33 @@ public class Video extends Holding
 	
 	public boolean returnHolding(DateTime dateReturned)
 	{
-		int diffDayResult = DateTime.diffDays(this.dateReturned, this.dateBorrowed);
-		if (diffDayResult <= this.LOAN_PERIOD)
+		int diffDayResult = DateTime.diffDays(dateReturned, dateBorrowed);
+		
+		/* If: 
+		 * 		1. Return date is not later than the borrow date;
+		 * 		2. It's not set to onLoan;
+		 * 		3. It's not active,
+		 * 
+		 * ... then the loan is invalid, cannot return.
+		 * 
+		 * */
+		if(diffDayResult <= LOAN_PERIOD)
 		{
-			// The loan does not expire, so there is no late penalty.
-			if (diffDayResult < 1)
+			if (diffDayResult < 0 || !onLoan || !activeStatus)
 			{
+				if (!onLoan)
+				{
+					System.out.println("Error: Item is not on loan!!");
+				}
+				if (!activeStatus)
+				{
+					System.out.println("Error: Item is not active!!");
+				}
+				
+				if (diffDayResult < 0)
+				{
+					System.out.println("Error: Date record seems to be wrong!!");
+				}
 				return false;
 			}
 			else
@@ -74,10 +95,12 @@ public class Video extends Holding
 		}
 		else
 		{
-			this.lateFee += calculateLateFee(dateReturned);
+			this.lateFee = calculateLateFee(dateReturned);
 			this.onLoan = false;
 			return true;
 		}
+		
+		
 	}
 	
 	public boolean activate()

@@ -294,12 +294,47 @@ public class Main
 	
 	private static void borrowHolding()
 	{
+		Scanner userInputScanner = new Scanner(System.in);
 		
+		System.out.print("\n\nEnter member ID: ");
+		String memberId = userInputScanner.nextLine();
+		System.out.print("\n\nEnter holding ID: ");
+		String holdingId = userInputScanner.nextLine();
+		
+		if (facadeController.borrowHolding(memberId, holdingId))
+		{
+			System.out.println("Info: Holding borrowed successfully!");
+		}
+		else
+		{
+			System.out.println("Error: Member failed to borrow, " + "Member ID: " + memberId + " Holding ID: " + holdingId);
+		}
+		
+		mainMenu();
+		userInputScanner.close();
 	}
 	
 	private static void returnHolding()
 	{
+		Scanner userInputScanner = new Scanner(System.in);
 		
+		System.out.print("\n\nEnter member ID: ");
+		String memberId = userInputScanner.nextLine();
+		System.out.print("\n\nEnter holding ID: ");
+		String holdingId = userInputScanner.nextLine();
+		
+		
+		if (facadeController.returnHolding(memberId, holdingId, facadeController.currentTime))
+		{
+			System.out.println("Info: Holding returned successfully!");
+		}
+		else
+		{
+			System.out.println("Error: Member failed to borrow, " + "Member ID: " + memberId + " Holding ID: " + holdingId);
+		}
+		
+		mainMenu();
+		userInputScanner.close();
 	}
 
 	private static void printAllHoldings()
@@ -316,27 +351,88 @@ public class Main
 	
 	private static void printSpecificHolding()
 	{
+		Scanner userInputScanner = new Scanner(System.in);
 		
+		System.out.print("\n\nEnter holding ID: ");
+		String holdingId = userInputScanner.nextLine();
+		
+		System.out.println(facadeController.printSpecificHolding(holdingId));
+		
+		mainMenu();
+		userInputScanner.close();
 	}
 	
 	private static void printSpecificMember()
 	{
+		Scanner userInputScanner = new Scanner(System.in);
 		
+		System.out.print("\n\nEnter member ID: ");
+		String memberId = userInputScanner.nextLine();
+		
+		System.out.println(facadeController.printSpecificHolding(memberId));
+		
+		mainMenu();
+		userInputScanner.close();
 	}
 	
 	private static void active()
 	{
+		Scanner userInputScanner = new Scanner(System.in);
 		
+		System.out.print("\n\nEnter ID: ");
+		String idStr = userInputScanner.nextLine();
+		
+		if(facadeController.activate(idStr))
+		{
+			System.out.println("Info: Member/Holding activated!");
+		}
+		else
+		{
+			System.out.println("Error: Something went wrong, member/holding cannot be activated!");
+		}
+		
+		mainMenu();
+		userInputScanner.close();
 	}
 	
 	private static void deactive()
 	{
+		Scanner userInputScanner = new Scanner(System.in);
 		
+		System.out.print("\n\nEnter ID: ");
+		String idStr = userInputScanner.nextLine();
+		
+		if(facadeController.deactivate(idStr))
+		{
+			System.out.println("Info: Member/Holding deactivated!");
+		}
+		else
+		{
+			System.out.println("Error: Something went wrong, member/holding cannot be deactivated!");
+		}
+		
+		mainMenu();
+		userInputScanner.close();
 	}
 	
 	private static void resetCredit()
 	{
+		Scanner userInputScanner = new Scanner(System.in);
 		
+		System.out.print("\n\nEnter ID: ");
+		String idStr = userInputScanner.nextLine();
+		
+		if(facadeController.resetMembersCredit(idStr))
+		{
+			System.out.println("Info: Member/Holding has been reset!");
+		}
+		else
+		{
+			System.out.println("Error: Something went wrong, member/holding cannot be reset!");
+		}
+		
+		mainMenu();
+		userInputScanner.close();
 	}
 	
 	private static void saveToFile()

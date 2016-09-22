@@ -67,15 +67,20 @@ public class Book extends Holding
 		 * */
 		if(diffDayResult <= LOAN_PERIOD)
 		{
-			if (diffDayResult < 1 || !onLoan || !activeStatus)
+			if (diffDayResult < 0 || !onLoan || !activeStatus)
 			{
-				if(!onLoan)
+				if (!onLoan)
 				{
 					System.out.println("Error: Item is not on loan!!");
 				}
-				if(!activeStatus)
+				if (!activeStatus)
 				{
 					System.out.println("Error: Item is not active!!");
+				}
+				
+				if (diffDayResult < 0)
+				{
+					System.out.println("Error: Date record seems to be wrong!!");
 				}
 				return false;
 			}
@@ -87,7 +92,7 @@ public class Book extends Holding
 		}
 		else
 		{
-			this.lateFee += calculateLateFee(dateReturned);
+			this.lateFee = calculateLateFee(dateReturned);
 			this.onLoan = false;
 			return true;
 		}
@@ -205,6 +210,7 @@ public class Book extends Holding
 	{
 		return LOAN_FEE;
 	}
+	
 	
 	public int getLoanPeriod()
 	{

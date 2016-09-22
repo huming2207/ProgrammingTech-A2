@@ -64,7 +64,6 @@ public class Library
 		for(int i = 0; i < holdingList.size(); i++)
 		{
 			Holding holdingItem = holdingList.get(i);
-			String str = holdingItem.getId();
 			
 			// Delete only if the holding ID matches.
 			if (holdingItem.getId().matches(holdingId))
@@ -139,9 +138,11 @@ public class Library
 				for (int j = 0; j < memberList.size(); j++)
 				{
 					Member memberItem = memberList.get(j);
-					if (memberItem.getId() == memberId)
+					if (memberItem.getId().matches(memberId))
 					{
+						// Borrow the item, and deduct the loan fee.
 						memberItem.borrowHolding(selectedHolding);
+						memberItem.substractCredit(selectedHolding.getLoanFee());
 						memberStatus = true;
 					}
 					else
@@ -183,8 +184,18 @@ public class Library
 					Member memberItem = memberList.get(j);
 					if (memberItem.getId().matches(memberId))
 					{
-						DateTime returnTime = new DateTime();
-						memberItem.returnHolding(selectedHolding, returnTime);
+						System.out.println("Info: Member found, item will be returned.");
+						memberItem.returnHolding(selectedHolding, dateReturned);
+						
+						double lateFee = selectedHolding.getLatePenalty();
+						
+						// If lateFee exist, it will higher than 0 (zero).
+						if (lateFee > 0)
+						{
+							System.out.println("Info: Holding has a late penalty, ");
+							memberItem.substractCredit(lateFee);
+						}
+						
 						memberStatus = true;
 					}
 					else

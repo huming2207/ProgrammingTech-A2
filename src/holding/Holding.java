@@ -30,6 +30,7 @@ public abstract class Holding
 	
 	public abstract double getLatePenalty();
 	
+	public abstract double getLoanFee();
 	
 	/* In this line below is all those getters and setters. */
 

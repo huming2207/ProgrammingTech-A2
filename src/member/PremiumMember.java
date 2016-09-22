@@ -80,7 +80,7 @@ public class PremiumMember extends Member
 		if(holding.getId().charAt(0) == 'b')
 		{
 			Book book = (Book)holding;
-			if(book.returnHolding(returnDate))
+			if(holding.returnHolding(returnDate))
 			{
 				System.out.println("Info: Book returned successfully!!");
 				

@@ -11,6 +11,7 @@ public class LMSFacade
 	}
 	
 	private Library library = new Library();
+	public DateTime currentTime = new DateTime();
 	
 	private void initialiseEngine() 
 	{
