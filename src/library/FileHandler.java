@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -221,14 +222,6 @@ public class FileHandler
 	
 	public void writeHoldingToFile(String filePath, ArrayList<Holding> holdingList)
 	{
-		File file = new File(filePath);
-		
-		if(!file.exists())
-		{
-			System.out.println("Info: file at " + filePath + " seems does not exist, will create a new one.");
-		}
-			
-		
 		FileWriter fileWriter = null;
 		try
 		{
@@ -287,18 +280,25 @@ public class FileHandler
 				}
 			}
 		}
+		
+		try 
+		{
+			/*
+			 * I have to flush the cache every time it finishes write to disk.
+			 * Otherwise sometimes it will returns me an empty file!
+			 * */
+			fileWriter.flush();
+		} 
+		catch (IOException e) 
+		{
+			System.out.println("Error: File cache error! That so rare! Congratulations!\nCheck your drives first!");
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void writeMemberToFile(String filePath, ArrayList<Member> memberList)
 	{
-		File file = new File(filePath);
-		
-		if(!file.exists())
-		{
-			System.out.println("Info: file at " + filePath + " seems does not exist, will create a new one.");
-		}
-			
-		
 		FileWriter fileWriter = null;
 		try
 		{
@@ -315,7 +315,7 @@ public class FileHandler
 		
 		for (int i = 0; i < memberList.size(); i++)
 		{
-			if (memberList.get(i).getId().startsWith("b"))
+			if (memberList.get(i).getId().startsWith("p") || memberList.get(i).getId().startsWith("s"))
 			{
 				String strToWrite = memberList.get(i).getId() + ":" 
 								  + memberList.get(i).getName() + ":"
@@ -326,6 +326,11 @@ public class FileHandler
 				{
 					strToWrite += ":" + memberList.get(i).getHoldingStr() + "\n";
 				}
+				else
+				{
+					strToWrite += "\n";
+				}
+				
 				
 				try 
 				{
@@ -344,5 +349,20 @@ public class FileHandler
 				System.out.println("Error: cannot write to file. Array corrupted.");
 			}
 		}
+		
+		try 
+		{
+			/*
+			 * I have to flush the cache every time it finishes write to disk.
+			 * Otherwise sometimes it will returns me an empty file!
+			 * */
+			fileWriter.flush();
+		} 
+		catch (IOException e) 
+		{
+			System.out.println("Error: File cache error! That so rare! Congratulations!\nCheck your drives first!");
+			e.printStackTrace();
+		}
+		
 	}
 }

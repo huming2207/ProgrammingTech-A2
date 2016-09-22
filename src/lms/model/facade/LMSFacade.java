@@ -109,8 +109,19 @@ public class LMSFacade
 		library.saveFile();
 	}
 	
+	public void saveFile(String filePath)
+	{
+		library.saveFile(filePath);
+	}
+	
 	public void readFile()
 	{
 		library.readFile();
 	}
+	
+	public void readFile(String filePath)
+	{
+		library.readFile(filePath);
+	}
+
 }

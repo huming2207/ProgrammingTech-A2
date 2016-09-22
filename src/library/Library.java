@@ -374,7 +374,7 @@ public class Library
 					result = memberList.get(i).deactivate();
 				}
 			}
-			
+
 			return result;
 		}
 		else
@@ -389,7 +389,6 @@ public class Library
 		FileHandler fileController = new FileHandler();
 		
 		this.holdingList = fileController.readHoldingList("holdings.txt", "holdings_backup.txt");
-		
 		this.memberList = fileController.readMemberList(holdingList, "members.txt", "members_backup.txt");
 
 	}
@@ -401,5 +400,22 @@ public class Library
 		fileController.writeHoldingToFile("holdings_backup.txt", this.holdingList);
 		fileController.writeMemberToFile("members.txt", this.memberList);
 		fileController.writeMemberToFile("members_backup.txt", this.memberList);
+	}
+	
+	public void readFile(String filePath)
+	{
+		FileHandler fileController = new FileHandler();
+		
+		this.holdingList = fileController.readHoldingList(filePath + "holdings.txt", filePath + "holdings_backup.txt");
+		this.memberList = fileController.readMemberList(this.holdingList, filePath + "members.txt", filePath + "members_backup.txt");
+	}
+	
+	public void saveFile(String filePath)
+	{
+		FileHandler fileController = new FileHandler();
+		fileController.writeHoldingToFile(filePath + "holdings.txt", this.holdingList);
+		fileController.writeHoldingToFile(filePath + "holdings_backup.txt", this.holdingList);
+		fileController.writeMemberToFile(filePath + "members.txt", this.memberList);
+		fileController.writeMemberToFile(filePath + "members_backup.txt", this.memberList);
 	}
 }

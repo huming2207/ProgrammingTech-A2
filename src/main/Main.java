@@ -438,12 +438,44 @@ public class Main
 	
 	private static void saveToFile()
 	{
-		facadeController.saveFile();
+		Scanner userInputScanner = new Scanner(System.in);
+		
+		System.out.print("\n\nEnter \"A\" to save to another path (folder), \nFor default, enter something else:");
+		String idStr = userInputScanner.nextLine();
+		
+		if (idStr.matches("A"))
+		{
+			System.out.print("\n\nEnter path:");
+			String pathStr = userInputScanner.nextLine();
+			facadeController.saveFile(pathStr);
+			System.out.println("\nInfo: File saved.");
+		}
+		else
+		{
+			facadeController.saveFile();
+			System.out.println("\nInfo: File saved.");
+		}
 	}
 	
 	private static void loadFromFile()
 	{
-		facadeController.readFile();
+		Scanner userInputScanner = new Scanner(System.in);
+		
+		System.out.print("\n\nEnter \"A\" to load file another path (folder), \nFor default, enter something else:");
+		String idStr = userInputScanner.nextLine();
+		
+		if (idStr.matches("A"))
+		{
+			System.out.print("\n\nEnter path:");
+			String pathStr = userInputScanner.nextLine();
+			facadeController.readFile(pathStr);
+			System.out.println("\nInfo: File loaded.");
+		}
+		else
+		{
+			facadeController.readFile();
+			System.out.println("\nInfo: File loaded.");
+		}
 	}
 	
 
