@@ -1,2 +1,4 @@
-p01:hu:0.0
-p02:hu:0.0
+s000001:Joe Bloggs:35.0
+s000002:Jane Smith:35.0:b000001
+p000001:Fred Bloggs:0.0
+p00002:Fred Smith:0.0

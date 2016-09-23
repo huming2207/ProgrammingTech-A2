@@ -5,15 +5,9 @@ import lms.model.util.DateTime;
 
 public abstract class Member 
 {
-	private String memberID;
-	private String fullName;
-	private double credit;
-	
 	public Member(String memberID, String fullName, double credit)
 	{
-		this.memberID = memberID;
-		this.fullName = fullName;
-		this.credit = credit;
+		
 	}
 	
 	public abstract boolean borrowHolding(Holding holding);

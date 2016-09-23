@@ -172,6 +172,7 @@ public class Main
 			{
 				System.out.print("\n\nEnter book item ID: ");
 				String itemId = userInputScanner.nextLine();
+				
 				System.out.print("\nEnter book item title: ");
 				String itemTitle = userInputScanner.nextLine();
 				System.out.print("\nEnter book pages: ");
@@ -194,6 +195,7 @@ public class Main
 			{
 				System.out.print("\n\nEnter video item ID: ");
 				String itemId = userInputScanner.nextLine();
+				
 				System.out.print("\nEnter video item title: ");
 				String itemTitle = userInputScanner.nextLine();
 				System.out.print("\nEnter video loan fee: ");
@@ -257,6 +259,8 @@ public class Main
 		
 		System.out.print("\n\nEnter member ID: ");
 		String memberId = userInputScanner.nextLine();
+
+		
 		System.out.print("\nEnter member's name: ");
 		String memberName = userInputScanner.nextLine();
 		
@@ -279,6 +283,7 @@ public class Main
 		
 		System.out.print("\n\nEnter member ID: ");
 		String memberId = userInputScanner.nextLine();
+	
 		
 		if (facadeController.removeMember(memberId))
 		{
@@ -299,8 +304,10 @@ public class Main
 		
 		System.out.print("\n\nEnter member ID: ");
 		String memberId = userInputScanner.nextLine();
+		
 		System.out.print("\n\nEnter holding ID: ");
 		String holdingId = userInputScanner.nextLine();
+		
 		
 		if (facadeController.borrowHolding(memberId, holdingId))
 		{
@@ -321,9 +328,10 @@ public class Main
 		
 		System.out.print("\n\nEnter member ID: ");
 		String memberId = userInputScanner.nextLine();
+		
 		System.out.print("\n\nEnter holding ID: ");
 		String holdingId = userInputScanner.nextLine();
-		
+
 		
 		if (facadeController.returnHolding(memberId, holdingId, facadeController.currentTime))
 		{
@@ -356,6 +364,7 @@ public class Main
 		
 		System.out.print("\n\nEnter holding ID: ");
 		String holdingId = userInputScanner.nextLine();
+		
 		
 		System.out.println(facadeController.printSpecificHolding(holdingId));
 		
@@ -455,6 +464,21 @@ public class Main
 			facadeController.saveFile();
 			System.out.println("\nInfo: File saved.");
 		}
+		
+		System.out.print("\n\nEnter \"E\" to exit, \nIf you want to stay, enter something else:");
+		String exitStr = userInputScanner.nextLine();
+		
+		if (exitStr.matches("E"))
+		{
+			System.out.println("Info: See you mate~!");
+			System.exit(0);
+		}
+		else
+		{
+			mainMenu();
+			userInputScanner.close();
+		}
+		
 	}
 	
 	private static void loadFromFile()
@@ -475,6 +499,20 @@ public class Main
 		{
 			facadeController.readFile();
 			System.out.println("\nInfo: File loaded.");
+		}
+		
+		System.out.print("\n\nEnter \"E\" to exit, \nIf you want to stay, enter something else:");
+		String exitStr = userInputScanner.nextLine();
+		
+		if (exitStr.matches("E"))
+		{
+			System.out.println("Info: See you mate~!");
+			System.exit(0);
+		}
+		else
+		{
+			mainMenu();
+			userInputScanner.close();
 		}
 	}
 	

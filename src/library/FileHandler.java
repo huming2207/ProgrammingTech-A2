@@ -75,12 +75,12 @@ public class FileHandler
 				memberStr[2] = strSplitter.nextToken(); // Member remaining credit
 				
 				
-				if (memberStr[0].startsWith("p"))
+				if (memberStr[0].startsWith("s"))
 				{
 					// Premium member found
 					member = new PremiumMember(memberStr[0], memberStr[1]);
 				}
-				else if (memberStr[0].startsWith("v"))
+				else if (memberStr[0].startsWith("p"))
 				{
 					// Premium member found
 					member = new StandardMember(memberStr[0], memberStr[1]);
@@ -243,7 +243,7 @@ public class FileHandler
 				String strToWrite = holdingList.get(i).getId()  + ":" 
 								  + holdingList.get(i).getTitle() + ":"
 								  + holdingList.get(i).getPages() + ":"
-								  + holdingList.get(i).getDateBorrowed() + ":"
+								  + holdingList.get(i).getDateBorrowed().getFormattedDate() + ":"
 								  + holdingList.get(i).getLoanFee() + ":"
 								  + holdingList.get(i).getLoanPeriod() + ":"
 								  + holdingList.get(i).getActiveStatusStr() + "\n";
@@ -264,7 +264,6 @@ public class FileHandler
 				String strToWrite = holdingList.get(i).getId()  + ":" 
 						  + holdingList.get(i).getTitle() + ":"
 						  + holdingList.get(i).getLength() + ":"
-						  + holdingList.get(i).getDateBorrowed() + ":"
 						  + holdingList.get(i).getLoanFee() + ":"
 						  + holdingList.get(i).getLoanPeriod() + ":"
 						  + holdingList.get(i).getActiveStatusStr() + "\n";
