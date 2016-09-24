@@ -173,6 +173,12 @@ public class Main
 				System.out.print("\n\nEnter book item ID: ");
 				String itemId = userInputScanner.nextLine();
 				
+				if (itemId.length() < 6)
+				{
+					System.out.print("Error: add failed, wrong format!");
+					mainMenu();
+				}
+				
 				System.out.print("\nEnter book item title: ");
 				String itemTitle = userInputScanner.nextLine();
 				System.out.print("\nEnter book pages: ");
@@ -195,6 +201,12 @@ public class Main
 			{
 				System.out.print("\n\nEnter video item ID: ");
 				String itemId = userInputScanner.nextLine();
+				
+				if (itemId.length() < 6)
+				{
+					System.out.print("Error: add failed, wrong format!");
+					mainMenu();
+				}
 				
 				System.out.print("\nEnter video item title: ");
 				String itemTitle = userInputScanner.nextLine();
@@ -242,6 +254,12 @@ public class Main
 		Scanner userInputScanner = new Scanner(System.in);
 		System.out.print("Enter holding ID: ");
 		String userInput = userInputScanner.nextLine();
+		
+		if (userInput.length() < 6)
+		{
+			System.out.print("Error: add failed, wrong format!");
+			mainMenu();
+		}
 			
 		if (facadeController.removeHolding(userInput))
 		{
@@ -260,9 +278,15 @@ public class Main
 		System.out.print("\n\nEnter member ID: ");
 		String memberId = userInputScanner.nextLine();
 
+		if (memberId.length() < 6)
+		{
+			System.out.print("Error: add failed, wrong format!");
+			mainMenu();
+		}
 		
 		System.out.print("\nEnter member's name: ");
 		String memberName = userInputScanner.nextLine();
+		
 		
 		if (facadeController.addMember(memberId, memberName))
 		{
@@ -284,6 +308,11 @@ public class Main
 		System.out.print("\n\nEnter member ID: ");
 		String memberId = userInputScanner.nextLine();
 	
+		if (memberId.length() < 6)
+		{
+			System.out.print("Error: removal failed, wrong format!");
+			mainMenu();
+		}
 		
 		if (facadeController.removeMember(memberId))
 		{
@@ -305,8 +334,20 @@ public class Main
 		System.out.print("\n\nEnter member ID: ");
 		String memberId = userInputScanner.nextLine();
 		
+		if (memberId.length() < 6)
+		{
+			System.out.print("Error: failed with wrong format!");
+			mainMenu();
+		}
+		
 		System.out.print("\n\nEnter holding ID: ");
 		String holdingId = userInputScanner.nextLine();
+		
+		if (holdingId.length() < 6)
+		{
+			System.out.print("Error: failed with wrong format!");
+			mainMenu();
+		}
 		
 		
 		if (facadeController.borrowHolding(memberId, holdingId))
@@ -329,9 +370,20 @@ public class Main
 		System.out.print("\n\nEnter member ID: ");
 		String memberId = userInputScanner.nextLine();
 		
+		if (memberId.length() < 6)
+		{
+			System.out.print("Error: failed with wrong format!");
+			mainMenu();
+		}
+		
 		System.out.print("\n\nEnter holding ID: ");
 		String holdingId = userInputScanner.nextLine();
 
+		if (holdingId.length() < 6)
+		{
+			System.out.print("Error: failed with wrong format!");
+			mainMenu();
+		}
 		
 		if (facadeController.returnHolding(memberId, holdingId, facadeController.currentTime))
 		{
@@ -365,6 +417,11 @@ public class Main
 		System.out.print("\n\nEnter holding ID: ");
 		String holdingId = userInputScanner.nextLine();
 		
+		if (holdingId.length() < 6)
+		{
+			System.out.print("Error: failed with wrong format!");
+			mainMenu();
+		}
 		
 		System.out.println(facadeController.printSpecificHolding(holdingId));
 		
@@ -379,6 +436,12 @@ public class Main
 		System.out.print("\n\nEnter member ID: ");
 		String memberId = userInputScanner.nextLine();
 		
+		if (memberId.length() < 6)
+		{
+			System.out.print("Error: failed with wrong format!");
+			mainMenu();
+		}
+		
 		System.out.println(facadeController.printSpecificHolding(memberId));
 		
 		mainMenu();
@@ -391,6 +454,12 @@ public class Main
 		
 		System.out.print("\n\nEnter ID: ");
 		String idStr = userInputScanner.nextLine();
+		
+		if (idStr.length() < 6)
+		{
+			System.out.print("Error: failed with wrong format!");
+			mainMenu();
+		}
 		
 		if(facadeController.activate(idStr))
 		{
@@ -412,6 +481,12 @@ public class Main
 		System.out.print("\n\nEnter ID: ");
 		String idStr = userInputScanner.nextLine();
 		
+		if (idStr.length() < 6)
+		{
+			System.out.print("Error: failed with wrong format!");
+			mainMenu();
+		}
+		
 		if(facadeController.deactivate(idStr))
 		{
 			System.out.println("Info: Member/Holding deactivated!");
@@ -431,6 +506,12 @@ public class Main
 		
 		System.out.print("\n\nEnter ID: ");
 		String idStr = userInputScanner.nextLine();
+		
+		if (idStr.length() < 6)
+		{
+			System.out.print("Error: failed with wrong format!");
+			mainMenu();
+		}
 		
 		if(facadeController.resetMembersCredit(idStr))
 		{
