@@ -1,8 +1,8 @@
-b000001:Intro to Java:200:23/09/2016:10.0:28:active
+b000001:Intro to Java:200:24/09/2016:10.0:28:active
 b000002:Learning UML:124:01/01/0001:10.0:28:active
 b000003:Design Patterns:345:01/01/0001:10.0:28:active
 b000004:Advanced Java:287:01/01/0001:10.0:28:active
-v000001:Java 1:1.37:01/01/0001:4.0:7:active
-v000002:Java 2:1.28:01/01/0001:6.5:7:active
-v000003:UML 1:1.47:01/01/0001:6.5:7:active
-v000004:UML 2:1.12:01/01/0001:4.0:7:active
+v000001:Java 1:1.37:4.0:7:active
+v000002:Java 2:1.28:6.5:7:active
+v000003:UML 1:1.47:6.5:7:active
+v000004:UML 2:1.12:4.0:7:active

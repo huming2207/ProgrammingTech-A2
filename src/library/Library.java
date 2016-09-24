@@ -272,7 +272,7 @@ public class Library
 		{
 			if (memberList.get(i).getId().matches(memberId))
 			{
-				memberList.get(i).resetCredit();
+				resetStatus = memberList.get(i).resetCredit();
 			}
 		}
 		
@@ -286,7 +286,7 @@ public class Library
 		{
 			if (memberList.get(i).getId().matches(memberId))
 			{
-				memberList.get(i).getLatePenalty();
+				lateFee = memberList.get(i).getLatePenalty();
 			}
 		}
 		
