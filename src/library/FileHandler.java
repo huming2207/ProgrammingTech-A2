@@ -47,13 +47,7 @@ public class FileHandler
 			catch (FileNotFoundException anotherError)
 			{
 				System.out.println("Error: List file not found in path: \n" + memberFilePath + "\n" + backupFilePath);
-				
-				// TODO: Make it easier to debug, but the teacher may not allow to print the trace record.
-				error.printStackTrace();
-				System.out.println("\n******************************\n******************************");
-				anotherError.printStackTrace();
-				
-				
+
 				System.exit(1);
 			}
 		}
@@ -150,11 +144,6 @@ public class FileHandler
 			catch (FileNotFoundException anotherError)
 			{
 				System.out.println("Error: List file not found in path: \n" + holdingFilePath + "\n" + backupFilePath);
-				
-				// TODO: Make it easier to debug, but the teacher may not allow to print the trace record.
-				error.printStackTrace();
-				System.out.println("\n******************************\n******************************");
-				anotherError.printStackTrace();
 				
 				System.exit(1);
 			}
