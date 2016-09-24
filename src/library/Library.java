@@ -212,6 +212,7 @@ public class Library
 			}
 		}
 		
+		// Return true only if both of them are true!
 		return (memberStatus && holdingStatus);
 	}
 	

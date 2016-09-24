@@ -185,7 +185,9 @@ public class FileHandler
 				}
 				else
 				{
-					// dateStr is for getting the split result, has 3 string elements in total
+					// "dateStr" is for getting the split result, has 3 string elements in total.
+					// Sometimes it's a good idea to use String.Split instead of StringTokenizer, 
+					//    since it's much more convenient!
 					String[] dateStr = holdingStr[3].split("/");
 					
 					holding.setDateBorrowed(new DateTime(
@@ -279,6 +281,10 @@ public class FileHandler
 		catch (IOException e) 
 		{
 			System.out.println("Error: File cache error! That so rare! Congratulations!\nCheck your drives first!");
+			
+			// It's a good idea to print stack trace here.
+			// IO Exception is unlikely to happen in most situation. It may caused by some complex issues.
+			// For example, it may caused by file system issues or some physical (hardware) issues.
 			e.printStackTrace();
 		}
 		
@@ -327,6 +333,10 @@ public class FileHandler
 				catch (IOException error) 
 				{
 					System.out.println("Error: cannot write to file. I/O Error.");
+					
+					// It's a good idea to print stack trace here.
+					// IO Exception is unlikely to happen in most situation. It may caused by some complex issues.
+					// For example, it may caused by file system issues or some physical (hardware) issues.
 					error.printStackTrace();
 				}
 				
@@ -341,13 +351,17 @@ public class FileHandler
 		{
 			/*
 			 * I have to flush the cache every time it finishes write to disk.
-			 * Otherwise sometimes it will returns me an empty file!
+			 * Otherwise sometimes it will returns me an empty file! 
 			 * */
 			fileWriter.flush();
 		} 
 		catch (IOException e) 
 		{
 			System.out.println("Error: File cache error! That so rare! Congratulations!\nCheck your drives first!");
+			
+			// It's a good idea to print stack trace here.
+			// IO Exception is unlikely to happen in most situation. It may caused by some complex issues.
+			// For example, it may caused by file system issues or some physical (hardware) issues.
 			e.printStackTrace();
 		}
 		

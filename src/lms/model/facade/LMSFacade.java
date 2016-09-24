@@ -104,6 +104,8 @@ public class LMSFacade
 		return library.deactivate(id);
 	}
 	
+	// Added these methods below, for Part C, File Handling stuff.
+	
 	public void saveFile()
 	{
 		library.saveFile();
