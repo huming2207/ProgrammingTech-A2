@@ -1,7 +1,6 @@
 package member;
 
 import java.util.ArrayList;
-import java.util.List;
 import holding.Book;
 import holding.Holding;
 import holding.Video;
@@ -12,10 +11,10 @@ public class PremiumMember extends Member
 	private String memberID;
 	private String memberName;
 	private static double credit;
-	private final double MAX_CREDIT = 45;
+	private final static double MAX_CREDIT = 45;
 	private boolean activateStatus;
-	private List<Book> memberBook = new ArrayList<Book>();
-	private List<Video> memberVideo = new ArrayList<Video>();
+	private ArrayList<Book> memberBook = new ArrayList<Book>();
+	private ArrayList<Video> memberVideo = new ArrayList<Video>();
 	private double lateFee = 0.0;
 	
 	public PremiumMember(String premimumMemberId, String premiumMemberName)
@@ -168,7 +167,7 @@ public class PremiumMember extends Member
 	@Override
 	public String print() 
 	{
-		String memberStr = "ID:\t\t\t" +  this.memberID
+		String memberStr = "\n\nID:\t\t\t" +  this.memberID
 						+ "\nTitle\t\t\t" + this.memberName
 						+ "\nRemaining Credit:\t" + credit + "\n";
 		
@@ -220,7 +219,7 @@ public class PremiumMember extends Member
 	@Override
 	public void addCredit(double creditAddValue) 
 	{
-		if ((PremiumMember.credit +  creditAddValue) >= this.MAX_CREDIT)
+		if ((PremiumMember.credit +  creditAddValue) >= MAX_CREDIT)
 		{
 			System.out.println("Error: Credit already reset to maxium value!");
 		}
@@ -245,14 +244,14 @@ public class PremiumMember extends Member
 	@Override
 	public boolean resetCredit() 
 	{
-		if (PremiumMember.credit >= this.MAX_CREDIT)
+		if (PremiumMember.credit >= MAX_CREDIT)
 		{
 			System.out.println("Error: Credit already reset to maxium value!");
 			return false;
 		}
 		else
 		{
-			PremiumMember.credit = this.MAX_CREDIT;
+			PremiumMember.credit = MAX_CREDIT;
 			return true;
 		}
 	}

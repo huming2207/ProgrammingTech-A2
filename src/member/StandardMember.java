@@ -12,7 +12,7 @@ public class StandardMember extends Member
 	private String memberID;
 	private String memberName;
 	private static double credit;
-	private final double MAX_CREDIT = 30;
+	private final static double MAX_CREDIT = 30;
 	private boolean activateStatus;
 	private List<Book> memberBook = new ArrayList<Book>();
 	private List<Video> memberVideo = new ArrayList<Video>();
@@ -172,7 +172,7 @@ public class StandardMember extends Member
 	@Override
 	public String print() 
 	{
-		String memberStr = "ID:\t\t\t" +  this.memberID
+		String memberStr = "\n\nID:\t\t\t" +  this.memberID
 						+ "\nTitle\t\t\t" + this.memberName
 						+ "\nRemaining Credit:\t" + StandardMember.credit + "\n";
 		
@@ -224,7 +224,7 @@ public class StandardMember extends Member
 	@Override
 	public void addCredit(double creditAddValue) 
 	{
-		if ((StandardMember.credit +  creditAddValue) >= this.MAX_CREDIT)
+		if ((StandardMember.credit +  creditAddValue) >= MAX_CREDIT)
 		{
 			System.out.println("Error: Credit already reset to maxium value!");
 		}
@@ -249,14 +249,14 @@ public class StandardMember extends Member
 	@Override
 	public boolean resetCredit() 
 	{
-		if (StandardMember.credit >= this.MAX_CREDIT)
+		if (StandardMember.credit >= MAX_CREDIT)
 		{
 			System.out.println("Error: Credit already reset to maxium value!");
 			return false;
 		}
 		else
 		{
-			StandardMember.credit = this.MAX_CREDIT;
+			StandardMember.credit = MAX_CREDIT;
 			return true;
 		}
 	}
