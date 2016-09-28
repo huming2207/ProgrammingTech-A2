@@ -2,7 +2,7 @@ package holding;
 
 import lms.model.util.DateTime;
 
-public abstract class Holding 
+public abstract class Holding implements SystemOperations
 {
 	private String holdingId;
 	private String title;
