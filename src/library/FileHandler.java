@@ -213,23 +213,31 @@ public class FileHandler
 	public void writeHoldingToFile(String filePath, ArrayList<Holding> holdingList)
 	{
 		FileWriter fileWriter = null;
+		
+		// Try to find and load the file
 		try
 		{
 			fileWriter = new FileWriter(filePath, false);
 		}
 		catch (FileNotFoundException existenceError)
 		{
-
+			System.out.println("Error: cannot find the file at: " + filePath);
+			System.exit(1);
 		}
 		catch (IOException IOError)
 		{
-			
+			// I/O Error is a bit complex, so print the stack trace is necessary
+			System.out.println("Error: I/O error occured, file at: " + filePath);
+			IOError.printStackTrace();
+			System.exit(1);
 		}
 		
 		for (int i = 0; i < holdingList.size(); i++)
 		{
+			// Judge it if it's a book, or a video?
 			if (holdingList.get(i).getId().startsWith("b"))
 			{
+				
 				String strToWrite = holdingList.get(i).getId()  + ":" 
 								  + holdingList.get(i).getTitle() + ":"
 								  + holdingList.get(i).getPages() + ":"
@@ -244,8 +252,9 @@ public class FileHandler
 				
 				catch (IOException error) 
 				{
-					System.out.println("Error: cannot write to file.");
+					System.out.println("Error: cannot write to file. I/O Error.");
 					error.printStackTrace();
+					System.exit(1);
 				}
 				
 			}
@@ -254,6 +263,7 @@ public class FileHandler
 				String strToWrite = holdingList.get(i).getId()  + ":" 
 						  + holdingList.get(i).getTitle() + ":"
 						  + holdingList.get(i).getLength() + ":"
+						  + holdingList.get(i).getDateBorrowed().getFormattedDate() + ":"
 						  + holdingList.get(i).getLoanFee() + ":"
 						  + holdingList.get(i).getLoanPeriod() + ":"
 						  + holdingList.get(i).getActiveStatusStr() + "\n";
@@ -273,7 +283,7 @@ public class FileHandler
 		try 
 		{
 			/*
-			 * I have to flush the cache every time it finishes write to disk.
+			 * I have to flush the cache every time and close it to finalize writing procedure to disk.
 			 * Otherwise sometimes it will returns me an empty file!
 			 * */
 			fileWriter.flush();
@@ -350,8 +360,8 @@ public class FileHandler
 		try 
 		{
 			/*
-			 * I have to flush the cache every time it finishes write to disk.
-			 * Otherwise sometimes it will returns me an empty file! 
+			 * I have to flush the cache every time and close it to finalize writing procedure to disk.
+			 * Otherwise sometimes it will returns me an empty file!
 			 * */
 			fileWriter.flush();
 		} 

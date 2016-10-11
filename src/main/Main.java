@@ -3,6 +3,8 @@ package main;
 import java.util.Scanner;
 import lms.model.facade.*;			
 
+// Nothing needs to explain in this Main method. It's just some boring user keyboard input stuff.
+
 
 public class Main 
 {

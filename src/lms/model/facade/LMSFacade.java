@@ -1,6 +1,6 @@
 package lms.model.facade;
 
-import library.*;
+import library.Library;
 import lms.model.util.DateTime;
 
 public class LMSFacade 
