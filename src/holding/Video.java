@@ -115,7 +115,7 @@ public class Video extends Holding
 		return true;
 	}
 	
-	@Override
+	
 	public String print() 
 	{
 		String activeStr = new String();
@@ -132,11 +132,11 @@ public class Video extends Holding
 		
 		if (this.onLoan)
 		{			
-			String printStr = "\n\nID:\t" + super.getId() 
-				+ "\nTitle:\t" + super.getTitle()
+			String printStr = "\n\nID:\t\t" + super.getId() 
+				+ "\nTitle:\t\t" + super.getTitle()
 				+ "\nRunning Time:\t" + this.runningTime
 				+ "\nLoan Fee:\t" + this.loanFee
-				+ "\nMax Loan Period:\t" + LOAN_PERIOD
+				+ "\nMax Loan Period: " + LOAN_PERIOD
 				+ "\nOn Loan:\t" + "Yes"
 				+ "\nDate of Loan:\t" + dateBorrowed.getFormattedDate()
 				+ "\nSystem Status:\t" + activeStr
@@ -146,11 +146,11 @@ public class Video extends Holding
 		}
 		else
 		{
-			String printStr = "\n\nID:\t" + super.getId() 
-				+ "\nTitle:\t" + super.getTitle()
+			String printStr = "\n\nID:\t\t" + super.getId() 
+				+ "\nTitle:\t\t" + super.getTitle()
 				+ "\nRunning Time:\t" + this.runningTime
 				+ "\nLoan Fee:\t" + this.loanFee
-				+ "\nMax Loan Period:\t" + LOAN_PERIOD
+				+ "\nMax Loan Period: " + LOAN_PERIOD
 				+ "\nOn Loan:\t" + "No" 
 				+ "\nSystem Status:\t" + activeStr
 				+ "\n";

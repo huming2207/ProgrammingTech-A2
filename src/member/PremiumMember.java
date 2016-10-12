@@ -11,11 +11,14 @@ public class PremiumMember extends Member
 	private String memberID;
 	private String memberName;
 	private static double credit;
-	private final static double MAX_CREDIT = 45;
+	private final static double MAX_CREDIT = 45;					// Max credit is $45
 	private boolean activateStatus;
-	private ArrayList<Book> memberBook = new ArrayList<Book>();
-	private ArrayList<Video> memberVideo = new ArrayList<Video>();
 	private double lateFee = 0.0;
+	
+	// Don't use the array any more, it's too young too simple, sometimes naive.
+	// Use the C#-like ArrayList<T> instead!
+	private ArrayList<Book> memberBook = new ArrayList<Book>();		
+	private ArrayList<Video> memberVideo = new ArrayList<Video>();
 	
 	public PremiumMember(String premimumMemberId, String premiumMemberName)
 	{
@@ -24,10 +27,10 @@ public class PremiumMember extends Member
 		this.memberName = premiumMemberName;
 	}
 
-	@Override
+	
 	public boolean borrowHolding(Holding holding) 
 	{
-		// Get current time in Unix time stamp.
+		// Get current time from DateTime.
 		DateTime time = new DateTime();
 				
 		// Judge whether the member borrowed a book or a video first.
@@ -36,15 +39,12 @@ public class PremiumMember extends Member
 			Book book = (Book)holding;
 			if(book.borrowHolding(time))
 			{
-				System.out.println("Info: Book borrowed!");
-				System.out.println("Name: " + book.getTitle());
-				System.out.println("ID: " + book.getId());
+				// Add book to the book list
 				memberBook.add(book);
 				return true;
 			}
 			else
 			{
-				System.out.print("Error: Book failed to borrow!");
 				return false;
 			}
 					
@@ -54,26 +54,22 @@ public class PremiumMember extends Member
 			Video video = (Video)holding;
 			if (video.borrowHolding(time))
 			{
-				System.out.println("Info: Video borrowed!");
-				System.out.println("Name: " + video.getTitle());
-				System.out.println("ID: " + video.getId());
+				// Add video to the video list
 				memberVideo.add(video);
 				return true;
 			}
 			else
 			{
-				System.out.print("Error: Video failed to borrow!");
 				return false;
 			}
 		}
 		else
 		{
-			System.out.println("Error: Something went wrong (might be a invalid item??)");
 			return false;
 		}
 	}
 	
-	@Override
+	
 	public boolean returnHolding(Holding holding, DateTime returnDate) 
 	{
 		if(holding.getId().charAt(0) == 'b')
@@ -81,8 +77,6 @@ public class PremiumMember extends Member
 			Book book = (Book)holding;
 			if(holding.returnHolding(returnDate))
 			{
-				System.out.println("Info: Book returned successfully!!");
-				
 				if(book.getLatePenalty() > 0)
 				{
 					lateFee += book.getLatePenalty();
@@ -101,8 +95,6 @@ public class PremiumMember extends Member
 			Video video = (Video)holding;
 			if(video.returnHolding(returnDate))
 			{
-				System.out.println("Info: Video returned successfully!!");
-				
 				if(video.getLatePenalty() > 0)
 				{
 					lateFee += video.getLatePenalty();
@@ -125,12 +117,11 @@ public class PremiumMember extends Member
 	}
 
 
-	@Override
+	
 	public boolean deactivate() 
 	{
 		if(this.activateStatus)
 		{
-			System.out.println("Info: Member deactivated successfully!");
 			this.activateStatus = false;
 			return true;
 		}
@@ -141,12 +132,11 @@ public class PremiumMember extends Member
 		}
 	}
 
-	@Override
+	
 	public boolean activate() 
 	{
 		if(!this.activateStatus)
 		{
-			System.out.println("Info: Member activated successfully!");
 			this.activateStatus = true;
 			return true;
 		}
@@ -157,14 +147,14 @@ public class PremiumMember extends Member
 		}
 	}
 
-	@Override
+	
 	public String toString() 
 	{
 		String str = this.memberID + ":" +  this.memberName + ":" + credit;
 		return str;
 	}
 
-	@Override
+	
 	public String print() 
 	{
 		String memberStr = "\n\nID:\t\t\t" +  this.memberID
@@ -210,13 +200,13 @@ public class PremiumMember extends Member
 		return memberStr + itemStr;
 	}
 
-	@Override
+	
 	public void setCredit(double credit) 
 	{
 		PremiumMember.credit = credit;
 	}
 
-	@Override
+	
 	public void addCredit(double creditAddValue) 
 	{
 		if ((PremiumMember.credit +  creditAddValue) >= MAX_CREDIT)
@@ -229,19 +219,19 @@ public class PremiumMember extends Member
 		}
 	}
 
-	@Override
+	
 	public void substractCredit(double creditSubstractValue) 
 	{
 		PremiumMember.credit -= creditSubstractValue;
 	}
 
-	@Override
+	
 	public double getCredit() 
 	{
 		return PremiumMember.credit;
 	}
 	
-	@Override
+	
 	public boolean resetCredit() 
 	{
 		if (PremiumMember.credit >= MAX_CREDIT)
@@ -256,25 +246,25 @@ public class PremiumMember extends Member
 		}
 	}
 
-	@Override
+	
 	public String getId() 
 	{
 		return this.memberID;
 	}
 
-	@Override
+	
 	public String getName() 
 	{
 		return this.memberName;
 	}
 
-	@Override
+	
 	public double getLatePenalty() 
 	{
 		return this.lateFee;
 	}
 	
-	@Override
+	
 	public String getHoldingStr()
 	{
 		String itemId = new String();
@@ -305,7 +295,7 @@ public class PremiumMember extends Member
 		return itemId;
 	}
 	
-	@Override
+	
 	public boolean hasHolding()
 	{
 		if (memberBook.isEmpty())

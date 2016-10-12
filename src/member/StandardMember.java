@@ -1,7 +1,6 @@
 package member;
 
 import java.util.ArrayList;
-import java.util.List;
 import holding.Book;
 import holding.Video;
 import holding.Holding;
@@ -12,11 +11,14 @@ public class StandardMember extends Member
 	private String memberID;
 	private String memberName;
 	private static double credit;
-	private final static double MAX_CREDIT = 30;
+	private final static double MAX_CREDIT = 30;				// Max credit is $30
 	private boolean activateStatus;
-	private List<Book> memberBook = new ArrayList<Book>();
-	private List<Video> memberVideo = new ArrayList<Video>();
 	private double lateFee = 0.0;
+	
+	// Don't use the array any more, it's too young too simple, sometimes naive.
+	// Use the C#-like ArrayList<T> instead!
+	private ArrayList<Book> memberBook = new ArrayList<Book>();
+	private ArrayList<Video> memberVideo = new ArrayList<Video>();
 	
 	public StandardMember(String standardMemberId, String standardMemberName)
 	{
@@ -24,8 +26,7 @@ public class StandardMember extends Member
 		this.memberID = standardMemberId;
 		this.memberName = standardMemberName;
 	}
-
-	@Override
+	
 	public boolean borrowHolding(Holding holding) 
 	{
 		// Get current time in Unix time stamp.
@@ -37,9 +38,7 @@ public class StandardMember extends Member
 			Book book = (Book)holding;
 			if(book.borrowHolding(time))
 			{
-				System.out.println("Info: Book borrowed!");
-				System.out.println("Name: " + book.getTitle());
-				System.out.println("ID: " + book.getId());
+				// Add video to the book list
 				memberBook.add(book);
 				return true;
 			}
@@ -55,9 +54,7 @@ public class StandardMember extends Member
 			Video video = (Video)holding;
 			if (video.borrowHolding(time))
 			{
-				System.out.println("Info: Video borrowed!");
-				System.out.println("Name: " + video.getTitle());
-				System.out.println("ID: " + video.getId());
+				// Add video to the video list
 				memberVideo.add(video);
 				return true;
 			}
@@ -75,7 +72,7 @@ public class StandardMember extends Member
 		
 	}
 	
-	@Override
+	
 	public boolean returnHolding(Holding holding, DateTime returnDate) 
 	{
 		if(holding.getId().charAt(0) == 'b')
@@ -83,8 +80,6 @@ public class StandardMember extends Member
 			Book book = (Book)holding;
 			if(book.returnHolding(returnDate))
 			{
-				System.out.println("Info: Book returned successfully!!");
-				
 				if(book.getLatePenalty() > 0)
 				{
 					lateFee += book.getLatePenalty();
@@ -94,7 +89,6 @@ public class StandardMember extends Member
 			}
 			else
 			{
-				System.out.println("Error: Book failed to return!!!");
 				return false;
 			}
 		}
@@ -103,8 +97,6 @@ public class StandardMember extends Member
 			Video video = (Video)holding;
 			if(video.returnHolding(returnDate))
 			{
-				System.out.println("Info: Video returned successfully!!");
-				
 				if(video.getLatePenalty() > 0)
 				{
 					lateFee += video.getLatePenalty();
@@ -114,14 +106,12 @@ public class StandardMember extends Member
 			}
 			else
 			{
-				System.out.println("Error: Video failed to return!!!");
 				return false;
 			}
 			
 		}
 		else
 		{
-			System.out.println("Error: Something went wrong (might be a invalid item??)");
 			return false;
 		}
 		
@@ -130,46 +120,42 @@ public class StandardMember extends Member
 	}
 
 	
-	@Override
+	
 	public boolean deactivate() 
 	{
 		if(this.activateStatus)
 		{
-			System.out.println("Info: Member deactivated successfully!");
 			this.activateStatus = false;
 			return true;
 		}
 		else
 		{
-			System.out.println("Error: Member already deactivated!");
 			return false;
 		}
 	}
 
-	@Override
+	
 	public boolean activate() 
 	{
 		if(!this.activateStatus)
 		{
-			System.out.println("Info: Member activated successfully!");
 			this.activateStatus = true;
 			return true;
 		}
 		else
 		{
-			System.out.println("Error: Member already activated!");
 			return false;
 		}
 	}
 
-	@Override
+	
 	public String toString() 
 	{
 		String str = this.memberID + ":" +  this.memberName + ":" + StandardMember.credit;
 		return str;
 	}
 
-	@Override
+	
 	public String print() 
 	{
 		String memberStr = "\n\nID:\t\t\t" +  this.memberID
@@ -215,13 +201,13 @@ public class StandardMember extends Member
 		return memberStr + itemStr;
 	}
 
-	@Override
+	
 	public void setCredit(double credit) 
 	{
 		StandardMember.credit = credit;
 	}
 
-	@Override
+	
 	public void addCredit(double creditAddValue) 
 	{
 		if ((StandardMember.credit +  creditAddValue) >= MAX_CREDIT)
@@ -234,19 +220,19 @@ public class StandardMember extends Member
 		}
 	}
 
-	@Override
+	
 	public void substractCredit(double creditSubstractValue) 
 	{
 		StandardMember.credit -= creditSubstractValue;
 	}
 
-	@Override
+	
 	public double getCredit() 
 	{
 		return StandardMember.credit;
 	}
 	
-	@Override
+	
 	public boolean resetCredit() 
 	{
 		if (StandardMember.credit >= MAX_CREDIT)
@@ -261,25 +247,25 @@ public class StandardMember extends Member
 		}
 	}
 
-	@Override
+	
 	public String getId() 
 	{
 		return this.memberID;
 	}
 
-	@Override
+	
 	public String getName() 
 	{
 		return this.memberName;
 	}
 	
-	@Override
+	
 	public double getLatePenalty() 
 	{
 		return this.lateFee;
 	}
 	
-	@Override
+	
 	public String getHoldingStr()
 	{
 		String itemId = new String();
@@ -310,7 +296,7 @@ public class StandardMember extends Member
 		return itemId;
 	}
 	
-	@Override
+	
 	public boolean hasHolding()
 	{
 		if (memberBook.isEmpty())

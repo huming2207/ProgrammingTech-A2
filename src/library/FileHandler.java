@@ -226,7 +226,8 @@ public class FileHandler
 		}
 		catch (IOException IOError)
 		{
-			// I/O Error is a bit complex, so print the stack trace is necessary
+			// I/O Error is a bit complex, 
+			//   so print the stack trace and tell the user what exactly happens is necessary
 			System.out.println("Error: I/O error occured, file at: " + filePath);
 			IOError.printStackTrace();
 			System.exit(1);
@@ -287,6 +288,7 @@ public class FileHandler
 			 * Otherwise sometimes it will returns me an empty file!
 			 * */
 			fileWriter.flush();
+			fileWriter.close();
 		} 
 		catch (IOException e) 
 		{
@@ -309,11 +311,16 @@ public class FileHandler
 		}
 		catch (FileNotFoundException existenceError)
 		{
-
+			System.out.println("Error: cannot find the file at: " + filePath);
+			System.exit(1);
 		}
 		catch (IOException IOError)
 		{
-			
+			// I/O Error is a bit complex, 
+			//   so print the stack trace and tell the user what exactly happens is necessary
+			System.out.println("Error: I/O error occured, file at: " + filePath);
+			IOError.printStackTrace();
+			System.exit(1);
 		}
 		
 		for (int i = 0; i < memberList.size(); i++)
@@ -364,6 +371,7 @@ public class FileHandler
 			 * Otherwise sometimes it will returns me an empty file!
 			 * */
 			fileWriter.flush();
+			fileWriter.close();
 		} 
 		catch (IOException e) 
 		{

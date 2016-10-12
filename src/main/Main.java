@@ -67,6 +67,7 @@ public class Main
 	
 	private static void selectionSwitch(int selection)
 	{
+		// Main switch case for menu selection
 		switch(selection)
 		{
 			case 1:
@@ -567,9 +568,9 @@ public class Main
 		Scanner userInputScanner = new Scanner(System.in);
 		
 		System.out.print("\n\nEnter \"A\" to load file another path (folder), \nFor default, enter something else:");
-		String idStr = userInputScanner.nextLine();
+		String selectionStr = userInputScanner.nextLine();
 		
-		if (idStr.matches("A"))
+		if (selectionStr.matches("A") || selectionStr.matches("a"))
 		{
 			System.out.print("\n\nEnter path:");
 			String pathStr = userInputScanner.nextLine();
@@ -585,7 +586,7 @@ public class Main
 		System.out.print("\n\nEnter \"E\" to exit, \nIf you want to stay, enter something else:");
 		String exitStr = userInputScanner.nextLine();
 		
-		if (exitStr.matches("E"))
+		if (exitStr.matches("E") || exitStr.matches("e"))
 		{
 			System.out.println("Info: See you mate~!");
 			System.exit(0);
